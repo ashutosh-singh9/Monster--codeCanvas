@@ -3,3 +3,7 @@
 @import url('components.css');
 @import url('sections/flavours.css');
 @import url('responsive.css');
+
+*{
+    user-select: none;
+}
