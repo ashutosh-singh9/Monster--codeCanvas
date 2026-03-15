@@ -539,4 +539,69 @@
         if (e.target === confirmBackdrop) closeConfirm();
     });
 
+    // ══════════════════════════════════════════════════════
+    // HAMBURGER MENU — Mobile nav toggle
+    // ══════════════════════════════════════════════════════
+    const hamburger         = document.getElementById('hamburger');
+    const mobileNavOverlay  = document.getElementById('mobile-nav-overlay');
+    const mobileNavLinks    = mobileNavOverlay ? mobileNavOverlay.querySelectorAll('a') : [];
+
+    function openMobileNav() {
+        document.body.classList.add('nav-open');
+        document.body.style.overflow = 'hidden';
+        hamburger && hamburger.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeMobileNav() {
+        document.body.classList.remove('nav-open');
+        document.body.style.overflow = '';
+        hamburger && hamburger.setAttribute('aria-expanded', 'false');
+    }
+
+    if (hamburger) {
+        hamburger.addEventListener('click', () => {
+            document.body.classList.contains('nav-open') ? closeMobileNav() : openMobileNav();
+        });
+    }
+
+    // Close overlay when any mobile nav link is tapped
+    mobileNavLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            closeMobileNav();
+        });
+    });
+
+    // Sync mobile nav active highlight with desktop scroll-spy
+    const mobileNavMap = {
+        home:     document.getElementById('mnav-home'),
+        flavours: document.getElementById('mnav-flavours'),
+        events:   document.getElementById('mnav-events'),
+        news:     document.getElementById('mnav-news'),
+        game:     document.getElementById('mnav-game'),
+    };
+
+    // Patch setActiveNav to also update mobile nav
+    const _origSetActiveNav = setActiveNav;
+    // Re-observe using the same IntersectionObserver — mobile nav highlights
+    // are driven by a MutationObserver watching the desktop nav-active class
+    const navObserver = new MutationObserver(() => {
+        Object.keys(navLinks).forEach(id => {
+            const isActive = navLinks[id] && navLinks[id].classList.contains('nav-active');
+            if (mobileNavMap[id]) {
+                mobileNavMap[id].classList.toggle('nav-active', isActive);
+            }
+        });
+    });
+
+    Object.values(navLinks).forEach(link => {
+        if (link) navObserver.observe(link, { attributes: true, attributeFilter: ['class'] });
+    });
+
+    // Close mobile nav on Escape
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && document.body.classList.contains('nav-open')) {
+            closeMobileNav();
+        }
+    });
+
     

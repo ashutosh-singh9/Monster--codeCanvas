@@ -55,7 +55,21 @@
             <li><a href="#game" id="nav-game">Game</a></li>
         </ul>
         <div class="nav-cta" id="nav-cta-cart">Cart <span class="cart-badge" id="cart-badge" style="display:none">0</span></div>
+        <!-- Hamburger — only visible on mobile -->
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
     </nav>
+
+    <!-- MOBILE NAV OVERLAY -->
+    <div class="mobile-nav-overlay" id="mobile-nav-overlay" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+        <div class="mobile-nav-accent-bar"></div>
+        <a href="#home"     id="mnav-home"     class="nav-active">Home</a>
+        <a href="#flavours" id="mnav-flavours"            >Flavours</a>
+        <a href="#events"   id="mnav-events"              >Events</a>
+        <a href="#news"     id="mnav-news"                >News</a>
+        <a href="#game"     id="mnav-game"                >Game</a>
+    </div>
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- SECTION 1 — HERO                                       -->
