@@ -12,19 +12,30 @@ body::before {
     inset: 0;
     z-index: -2;
     background:
-        radial-gradient(ellipse 80% 50% at 20% 30%,  rgba(0,229,255,0.06)  0%, transparent 60%),
-        radial-gradient(ellipse 60% 70% at 80% 70%,  rgba(156,39,176,0.07) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 40% at 50% 50%,  rgba(127,193,43,0.05) 0%, transparent 55%),
-        radial-gradient(ellipse 90% 90% at 10% 80%,  rgba(244,67,54,0.05)  0%, transparent 60%),
+        radial-gradient(ellipse 80% 50% at 20% 30%, rgba(0, 229, 255, 0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 70% at 80% 70%, rgba(156, 39, 176, 0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 50% 50%, rgba(127, 193, 43, 0.05) 0%, transparent 55%),
+        radial-gradient(ellipse 90% 90% at 10% 80%, rgba(244, 67, 54, 0.05) 0%, transparent 60%),
         #030305;
     animation: lc-drift 18s ease-in-out infinite alternate;
 }
 
 @keyframes lc-drift {
-    0%   { filter: hue-rotate(0deg)   brightness(1); }
-    33%  { filter: hue-rotate(40deg)  brightness(1.05); }
-    66%  { filter: hue-rotate(-30deg) brightness(0.97); }
-    100% { filter: hue-rotate(20deg)  brightness(1.03); }
+    0% {
+        filter: hue-rotate(0deg) brightness(1);
+    }
+
+    33% {
+        filter: hue-rotate(40deg) brightness(1.05);
+    }
+
+    66% {
+        filter: hue-rotate(-30deg) brightness(0.97);
+    }
+
+    100% {
+        filter: hue-rotate(20deg) brightness(1.03);
+    }
 }
 
 /* Second layer: moving light sweep */
@@ -33,28 +44,40 @@ body::after {
     position: fixed;
     inset: 0;
     z-index: -1;
-    background: linear-gradient(
-        135deg,
-        transparent 0%,
-        rgba(255,255,255,0.012) 30%,
-        transparent 50%,
-        rgba(255,255,255,0.008) 70%,
-        transparent 100%
-    );
+    background: linear-gradient(135deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.012) 30%,
+            transparent 50%,
+            rgba(255, 255, 255, 0.008) 70%,
+            transparent 100%);
     background-size: 300% 300%;
     animation: lc-sweep 8s linear infinite;
     pointer-events: none;
 }
 
 @keyframes lc-sweep {
-    0%   { background-position: 0% 0%; }
-    100% { background-position: 300% 300%; }
+    0% {
+        background-position: 0% 0%;
+    }
+
+    100% {
+        background-position: 300% 300%;
+    }
 }
 
 /* ── 3. Scrollbar ───────────────────────────────────────── */
-::-webkit-scrollbar { width: 3px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 99px; }
+::-webkit-scrollbar {
+    width: 3px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 99px;
+}
 
 /* ── 4. Hero ─────────────────────────────────────────────── */
 .fl-hero {
@@ -79,8 +102,13 @@ body::after {
 }
 
 @keyframes shimmer-bar {
-    0%   { background-position: 0%; }
-    100% { background-position: 200%; }
+    0% {
+        background-position: 0%;
+    }
+
+    100% {
+        background-position: 200%;
+    }
 }
 
 .fl-hero-title {
@@ -90,7 +118,7 @@ body::after {
     line-height: 1;
     color: #fff;
     text-transform: uppercase;
-    text-shadow: 0 4px 32px rgba(0,0,0,0.6);
+    text-shadow: 0 4px 32px rgba(0, 0, 0, 0.6);
 }
 
 .fl-hero-accent {
@@ -106,15 +134,20 @@ body::after {
 }
 
 @keyframes shimmer-text {
-    0%   { background-position: 0%; }
-    100% { background-position: 200%; }
+    0% {
+        background-position: 0%;
+    }
+
+    100% {
+        background-position: 200%;
+    }
 }
 
 .fl-hero-sub {
     font-family: 'Rajdhani', sans-serif;
     font-size: 0.9rem;
     letter-spacing: 7px;
-    color: rgba(255,255,255,0.35);
+    color: rgba(255, 255, 255, 0.35);
     margin-top: 1.2rem;
     text-transform: uppercase;
 }
@@ -137,23 +170,28 @@ body::after {
     cursor: none;
 }
 
-.fl-row--reverse { direction: rtl; }
-.fl-row--reverse > * { direction: ltr; }
+.fl-row--reverse {
+    direction: rtl;
+}
+
+.fl-row--reverse>* {
+    direction: ltr;
+}
 
 /* Prismatic section divider */
-.fl-row + .fl-row::before {
+.fl-row+.fl-row::before {
     content: '';
     position: absolute;
-    top: 0; left: 5%; right: 5%;
+    top: 0;
+    left: 5%;
+    right: 5%;
     height: 1px;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,0.04) 20%,
-        var(--row-accent, #7fc12b) 50%,
-        rgba(255,255,255,0.04) 80%,
-        transparent
-    );
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.04) 20%,
+            var(--row-accent, #7fc12b) 50%,
+            rgba(255, 255, 255, 0.04) 80%,
+            transparent);
     opacity: 0.4;
 }
 
@@ -164,6 +202,8 @@ body::after {
     justify-content: center;
     position: relative;
     padding: 3rem 2rem;
+    border-radius: 24px;
+    overflow: hidden;
 }
 
 /* Liquid-crystal frame: rotating conic gradient border */
@@ -173,16 +213,14 @@ body::after {
     inset: 0;
     border-radius: 24px;
     padding: 2px;
-    background: conic-gradient(
-        from var(--angle, 0deg),
-        var(--row-accent, #7fc12b)   0deg,
-        rgba(255,255,255,0.7)        60deg,
-        var(--row-accent, #7fc12b)   120deg,
-        rgba(255,255,255,0.1)        180deg,
-        var(--row-accent, #7fc12b)   240deg,
-        rgba(255,255,255,0.6)        300deg,
-        var(--row-accent, #7fc12b)   360deg
-    );
+    background: conic-gradient(from var(--angle, 0deg),
+            var(--row-accent, #7fc12b) 0deg,
+            rgba(255, 255, 255, 0.7) 60deg,
+            var(--row-accent, #7fc12b) 120deg,
+            rgba(255, 255, 255, 0.1) 180deg,
+            var(--row-accent, #7fc12b) 240deg,
+            rgba(255, 255, 255, 0.6) 300deg,
+            var(--row-accent, #7fc12b) 360deg);
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -199,7 +237,9 @@ body::after {
 }
 
 @keyframes border-spin {
-    to { --angle: 360deg; }
+    to {
+        --angle: 360deg;
+    }
 }
 
 /* Inner glow fill inside the frame */
@@ -208,11 +248,9 @@ body::after {
     position: absolute;
     inset: 2px;
     border-radius: 22px;
-    background: radial-gradient(
-        circle at 50% 60%,
-        color-mix(in srgb, var(--row-accent, #7fc12b) 10%, transparent) 0%,
-        rgba(3,3,5,0.6) 70%
-    );
+    background: radial-gradient(circle at 50% 60%,
+            color-mix(in srgb, var(--row-accent, #7fc12b) 10%, transparent) 0%,
+            rgba(3, 3, 5, 0.6) 70%);
     pointer-events: none;
     transition: background 0.6s ease;
     z-index: 0;
@@ -228,19 +266,19 @@ body::after {
     background-repeat: no-repeat;
     z-index: 1;
     opacity: 0.55;
+    transform: scale(1);
+    /* explicit default — no zoom at rest */
+    will-change: transform, opacity;
     transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
     /* gentle dark vignette so can stays readable */
-    -webkit-mask-image: radial-gradient(
-        ellipse 85% 85% at 50% 50%,
-        #000 40%, transparent 100%
-    );
-    mask-image: radial-gradient(
-        ellipse 85% 85% at 50% 50%,
-        #000 40%, transparent 100%
-    );
+    -webkit-mask-image: radial-gradient(ellipse 85% 85% at 50% 50%,
+            #000 40%, transparent 100%);
+    mask-image: radial-gradient(ellipse 85% 85% at 50% 50%,
+            #000 40%, transparent 100%);
 }
 
-.fl-row:hover .fl-img-bg {
+/* Zoom ONLY on hover — clipped by overflow:hidden on .fl-img-block */
+.fl-img-block:hover .fl-img-bg {
     opacity: 0.75;
     transform: scale(1.06);
 }
@@ -256,8 +294,7 @@ body::after {
     opacity: 0;
     /* iridescent dropshadow */
     filter:
-        drop-shadow(0 0 30px color-mix(in srgb, var(--row-accent, #7fc12b) 50%, transparent))
-        drop-shadow(0 30px 50px rgba(0,0,0,0.8));
+        drop-shadow(0 0 30px color-mix(in srgb, var(--row-accent, #7fc12b) 50%, transparent)) drop-shadow(0 30px 50px rgba(0, 0, 0, 0.8));
     transition: filter 0.6s ease;
 }
 
@@ -265,10 +302,10 @@ body::after {
 .fl-detail-card {
     padding: 3rem 3.5rem;
     /* frosted glass */
-    background: rgba(255,255,255,0.03);
+    background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(20px) saturate(160%);
     -webkit-backdrop-filter: blur(20px) saturate(160%);
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 28px;
     position: relative;
     overflow: hidden;
@@ -289,10 +326,10 @@ body::after {
     letter-spacing: 1.5px;
     text-transform: uppercase;
     padding: 0.35rem 0.9rem;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 99px;
-    color: rgba(255,255,255,0.55);
+    color: rgba(255, 255, 255, 0.55);
     cursor: pointer;
     transition: all 0.25s ease;
     position: relative;
@@ -316,7 +353,7 @@ body::after {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0,0,0,0.75);
+    background: rgba(0, 0, 0, 0.75);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     opacity: 0;
@@ -337,12 +374,12 @@ body::after {
     max-height: 90vh;
     overflow-y: auto;
     background: rgba(10, 10, 12, 0.97);
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-top: 3px solid var(--fl-km-accent, #7fc12b);
     border-radius: 28px;
     padding: 3rem 3rem 3rem 2.5rem;
     position: relative;
-    box-shadow: 0 40px 100px rgba(0,0,0,0.8), 0 0 60px rgba(0,0,0,0.5);
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8), 0 0 60px rgba(0, 0, 0, 0.5);
     transform: scale(0.94) translateY(24px);
     transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1);
 }
@@ -353,14 +390,18 @@ body::after {
 
 .fl-km-close {
     position: absolute;
-    top: 1.2rem; right: 1.2rem;
-    width: 32px; height: 32px;
+    top: 1.2rem;
+    right: 1.2rem;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    border: 1px solid rgba(255,255,255,0.15);
-    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.05);
     color: #fff;
     cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 0.8rem;
     transition: all 0.2s ease;
     z-index: 2;
@@ -391,8 +432,15 @@ body::after {
 }
 
 @keyframes km-pulse {
-    from { opacity: 0.3; transform: scale(0.9); }
-    to   { opacity: 0.55; transform: scale(1.1); }
+    from {
+        opacity: 0.3;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 0.55;
+        transform: scale(1.1);
+    }
 }
 
 .fl-km-can {
@@ -400,13 +448,18 @@ body::after {
     object-fit: contain;
     position: relative;
     z-index: 1;
-    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6));
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.6));
     animation: km-float 4s ease-in-out infinite alternate;
 }
 
 @keyframes km-float {
-    from { transform: translateY(0); }
-    to   { transform: translateY(-12px); }
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-12px);
+    }
 }
 
 /* Info body */
@@ -445,7 +498,7 @@ body::after {
 .fl-km-desc {
     font-size: 0.88rem;
     line-height: 1.8;
-    color: rgba(255,255,255,0.55);
+    color: rgba(255, 255, 255, 0.55);
     max-width: 480px;
 }
 
@@ -458,8 +511,8 @@ body::after {
 }
 
 .fl-km-chip {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 10px;
     padding: 0.55rem 1rem;
     display: flex;
@@ -471,7 +524,7 @@ body::after {
     font-size: 0.62rem;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.3);
+    color: rgba(255, 255, 255, 0.3);
 }
 
 .chip-val {
@@ -482,8 +535,8 @@ body::after {
 
 /* Ingredients */
 .fl-km-ingredients-block {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.06);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 12px;
     padding: 1rem 1.2rem;
     margin-top: 0.4rem;
@@ -494,14 +547,14 @@ body::after {
     font-size: 0.62rem;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.3);
+    color: rgba(255, 255, 255, 0.3);
     margin-bottom: 0.5rem;
 }
 
 .fl-km-ing-text {
     font-size: 0.78rem;
     line-height: 1.7;
-    color: rgba(255,255,255,0.4);
+    color: rgba(255, 255, 255, 0.4);
 }
 
 
@@ -511,35 +564,38 @@ body::after {
     position: absolute;
     inset: 0;
     border-radius: 28px;
-    background: linear-gradient(
-        125deg,
-        rgba(255,255,255,0)     0%,
-        rgba(255,255,255,0.03)  30%,
-        rgba(255,255,255,0)     50%,
-        rgba(255,255,255,0.025) 70%,
-        rgba(255,255,255,0)     100%
-    );
+    background: linear-gradient(125deg,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.03) 30%,
+            rgba(255, 255, 255, 0) 50%,
+            rgba(255, 255, 255, 0.025) 70%,
+            rgba(255, 255, 255, 0) 100%);
     background-size: 300% 300%;
     animation: holo-sweep 7s linear infinite;
     pointer-events: none;
 }
 
 @keyframes holo-sweep {
-    0%   { background-position: 0% 0%; }
-    100% { background-position: 300% 300%; }
+    0% {
+        background-position: 0% 0%;
+    }
+
+    100% {
+        background-position: 300% 300%;
+    }
 }
 
 /* Accent glow blob in the corner */
 .fl-detail-card::after {
     content: '';
     position: absolute;
-    top: -30%; right: -20%;
-    width: 70%; height: 70%;
-    background: radial-gradient(
-        circle,
-        color-mix(in srgb, var(--row-accent, #7fc12b) 15%, transparent) 0%,
-        transparent 70%
-    );
+    top: -30%;
+    right: -20%;
+    width: 70%;
+    height: 70%;
+    background: radial-gradient(circle,
+            color-mix(in srgb, var(--row-accent, #7fc12b) 15%, transparent) 0%,
+            transparent 70%);
     pointer-events: none;
     border-radius: 50%;
     transition: background 0.7s ease;
@@ -547,8 +603,15 @@ body::after {
 }
 
 @keyframes blob-pulse {
-    from { opacity: 0.7; transform: scale(1); }
-    to   { opacity: 1;   transform: scale(1.15); }
+    from {
+        opacity: 0.7;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1.15);
+    }
 }
 
 /* ── 9. Card text elements ───────────────────────────────── */
@@ -570,7 +633,7 @@ body::after {
     color: #fff;
     margin-top: 0.5rem;
     line-height: 1;
-    text-shadow: 0 2px 20px rgba(0,0,0,0.9);
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.9);
     position: relative;
     z-index: 1;
 }
@@ -593,7 +656,7 @@ body::after {
     font-family: 'Inter', sans-serif;
     font-size: 0.93rem;
     line-height: 1.85;
-    color: rgba(255,255,255,0.58);
+    color: rgba(255, 255, 255, 0.58);
     max-width: 400px;
     position: relative;
     z-index: 1;
@@ -606,8 +669,8 @@ body::after {
     list-style: none;
     margin: 2rem 0;
     padding: 1.5rem 0;
-    border-top: 1px solid rgba(255,255,255,0.06);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     position: relative;
     z-index: 1;
 }
@@ -629,14 +692,17 @@ body::after {
     transition: color 0.5s ease, text-shadow 0.5s ease;
 }
 
-.stat-val small { font-size: 0.85rem; opacity: 0.65; }
+.stat-val small {
+    font-size: 0.85rem;
+    opacity: 0.65;
+}
 
 .stat-lbl {
     font-weight: 600;
     font-size: 0.7rem;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.35);
+    color: rgba(255, 255, 255, 0.35);
 }
 
 /* ── 11. BUY button ──────────────────────────────────────── */
@@ -651,7 +717,7 @@ body::after {
     border: 1px solid transparent;
     border-radius: 6px;
     background-image:
-        linear-gradient(rgba(3,3,5,0.8), rgba(3,3,5,0.8)),
+        linear-gradient(rgba(3, 3, 5, 0.8), rgba(3, 3, 5, 0.8)),
         linear-gradient(90deg, var(--row-accent, #7fc12b), #fff, var(--row-accent, #7fc12b));
     background-origin: border-box;
     background-clip: padding-box, border-box;
