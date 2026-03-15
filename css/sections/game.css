@@ -108,11 +108,21 @@
     box-shadow: 0 0 10px var(--accent);
 }
 
-/* ── Canvas ──────────────────────────────────────────────── */
+/* ── Canvas ────────────────────────────────────────────── */
 #game-canvas {
     display: block;
     width: 100%;
     cursor: none;
+    /* desktop — custom cursor hides it */
+    touch-action: pan-y;
+    /* allow scroll past by default; JS sets none during play */
+}
+
+/* On touch devices, restore default cursor so taps are detected correctly */
+@media (pointer: coarse) {
+    #game-canvas {
+        cursor: auto;
+    }
 }
 
 /* ── Overlay ─────────────────────────────────────────────── */
@@ -177,6 +187,33 @@
 
     .instruction-touch {
         display: inline;
+    }
+}
+
+/* ── Mobile overlay scaling ───────────────────────────── */
+@media (max-width: 480px) {
+    .game-overlay {
+        gap: 0.6rem;
+        padding: 0.5rem;
+    }
+
+    .game-overlay-logo {
+        width: 48px;
+    }
+
+    .overlay-title {
+        font-size: 1.4rem;
+    }
+
+    .overlay-sub {
+        font-size: 0.75rem;
+        padding: 0 0.75rem;
+    }
+
+    .overlay-btn {
+        padding: 0.55rem 1.8rem;
+        font-size: 0.8rem;
+        margin-top: 0.2rem;
     }
 }
 

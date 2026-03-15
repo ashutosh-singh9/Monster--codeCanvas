@@ -34,8 +34,12 @@ const CAN_HEX = { green: '#7fc12b', cyan: '#00e5ff', purple: '#9c27b0', red: '#f
 // ── Canvas sizing ─────────────────────────────────────
 function resizeCanvas() {
     const w = canvas.parentElement.clientWidth;
+    // Use a taller ratio on narrow screens so the overlay fits
+    let ratio = 0.55;
+    if (w <= 480) ratio = 0.90;
+    else if (w <= 768) ratio = 0.72;
     canvas.width = w;
-    canvas.height = Math.round(w * 0.55);
+    canvas.height = Math.round(w * ratio);
 }
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
