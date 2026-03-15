@@ -1,4 +1,5 @@
-    font-size: 0.72rem;
+
+/* font-size: 0.72rem;
     font-weight: 700;
     letter-spacing: 0.15em;
     color: var(--accent);
@@ -6,7 +7,7 @@
     transform: translateX(-10px);
     transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
     margin-top: 0.5rem;
-}
+} */
 
 .nw-card:hover .nw-card-cta {
     opacity: 1;
