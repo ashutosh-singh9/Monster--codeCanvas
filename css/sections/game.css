@@ -35,7 +35,7 @@
 
 .game-sub {
     font-size: 0.9rem;
-    color: rgba(255,255,255,0.45);
+    color: rgba(255, 255, 255, 0.45);
     letter-spacing: 0.5px;
 }
 
@@ -44,9 +44,9 @@
     width: min(1000px, 92vw);
     border-radius: 24px;
     overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.08);
-    box-shadow: 0 24px 80px rgba(0,0,0,0.6);
-    background: rgba(8,8,8,0.8);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
+    background: rgba(8, 8, 8, 0.8);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
 }
@@ -57,10 +57,11 @@
     align-items: center;
     justify-content: space-between;
     padding: 1rem 1.5rem;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.hud-left, .hud-right {
+.hud-left,
+.hud-right {
     display: flex;
     flex-direction: column;
     gap: 0.15rem;
@@ -74,7 +75,7 @@
     font-size: 0.65rem;
     font-weight: 600;
     letter-spacing: 3px;
-    color: rgba(255,255,255,0.35);
+    color: rgba(255, 255, 255, 0.35);
     text-transform: uppercase;
 }
 
@@ -96,8 +97,8 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.15);
-    border: 1.5px solid rgba(255,255,255,0.2);
+    background: rgba(255, 255, 255, 0.15);
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
     transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -118,13 +119,14 @@
 .game-overlay {
     position: absolute;
     inset: 0;
-    top: 53px; /* below HUD */
+    top: 53px;
+    /* below HUD */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 1.2rem;
-    background: rgba(4,4,4,0.92);
+    background: rgba(4, 4, 4, 0.92);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     z-index: 20;
@@ -138,8 +140,13 @@
 }
 
 @keyframes logo-glow-pulse {
-    from { filter: drop-shadow(0 0 16px var(--accent)) drop-shadow(0 0 4px var(--accent)); }
-    to   { filter: drop-shadow(0 0 36px var(--accent)) drop-shadow(0 0 12px var(--accent)); }
+    from {
+        filter: drop-shadow(0 0 16px var(--accent)) drop-shadow(0 0 4px var(--accent));
+    }
+
+    to {
+        filter: drop-shadow(0 0 36px var(--accent)) drop-shadow(0 0 12px var(--accent));
+    }
 }
 
 .overlay-title {
@@ -152,10 +159,25 @@
 
 .overlay-sub {
     font-size: 0.88rem;
-    color: rgba(255,255,255,0.5);
+    color: rgba(255, 255, 255, 0.5);
     text-align: center;
     line-height: 1.7;
     letter-spacing: 0.3px;
+}
+
+/* Show correct instruction for device type */
+.instruction-touch {
+    display: none;
+}
+
+@media (pointer: coarse) {
+    .instruction-mouse {
+        display: none;
+    }
+
+    .instruction-touch {
+        display: inline;
+    }
 }
 
 .overlay-btn {
@@ -188,7 +210,7 @@
 
 .overlay-btn:hover {
     color: #000;
-    background: rgba(255,255,255,0.05);
+    background: rgba(255, 255, 255, 0.05);
     border-color: var(--accent);
 }
 
