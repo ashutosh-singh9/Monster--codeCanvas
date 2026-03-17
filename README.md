@@ -18,7 +18,7 @@ I wanted the site to feel "alive," so I used **GSAP ScrollTrigger** to handle th
 
 ---
 
-## 🛠️ How it's built  
+##  How it's built  
 
 I kept this project "old school" but with modern logic. No heavy frameworks or complex build steps—just solid HTML, CSS, and Vanilla JavaScript.
 
@@ -39,4 +39,4 @@ organized_code/
 ```
 
 
-**Unleash the Beast.** 🔥
+**Unleash the Beast.** 
