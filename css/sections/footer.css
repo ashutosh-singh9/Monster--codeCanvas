@@ -1,6 +1,4 @@
-/* ═══════════════════════════════════════════════════════════
-   SITE FOOTER  —  Monster Energy
-═══════════════════════════════════════════════════════════ */
+/* site footer */
 
 .site-footer {
     position: relative;
@@ -9,7 +7,7 @@
     overflow: hidden;
 }
 
-/* ── Scrolling text rail ──────────────────────────────────── */
+/* scrolling marquee rail */
 .footer-rail {
     display: flex;
     overflow: hidden;
@@ -24,6 +22,7 @@
     white-space: nowrap;
     animation: footer-rail-scroll 22s linear infinite;
     flex-shrink: 0;
+    will-change: transform; /* GPU-promote marquee */
 }
 
 .footer-rail-inner span {
@@ -45,7 +44,7 @@
     }
 }
 
-/* ── Main grid body ───────────────────────────────────────── */
+/* main footer grid */
 .footer-body {
     display: grid;
     grid-template-columns: 1.6fr 1fr 1fr 1.6fr;
@@ -54,7 +53,7 @@
     position: relative;
 }
 
-/* subtle glow behind footer */
+/* ambient glow behind the grid */
 .footer-body::before {
     content: '';
     position: absolute;
@@ -65,7 +64,7 @@
     pointer-events: none;
 }
 
-/* ── Brand column ─────────────────────────────────────────── */
+/* brand/logo col */
 .footer-logo {
     display: flex;
     align-items: center;
@@ -95,7 +94,7 @@
     margin-bottom: 1.8rem;
 }
 
-/* Social buttons */
+/* social icon buttons */
 .footer-socials {
     display: flex;
     gap: 0.75rem;
@@ -128,7 +127,7 @@
     transform: translateY(-2px);
 }
 
-/* ── Link columns ─────────────────────────────────────────── */
+/* link columns */
 .footer-col-heading {
     font-size: 0.72rem;
     font-weight: 700;
@@ -170,7 +169,7 @@
     padding-left: 4px;
 }
 
-/* ── Newsletter column ────────────────────────────────────── */
+/* newsletter column */
 .footer-newsletter-sub {
     font-size: 0.83rem;
     line-height: 1.7;
@@ -232,7 +231,7 @@
     letter-spacing: 0.5px;
 }
 
-/* ── Bottom bar ───────────────────────────────────────────── */
+/* bottom legal bar */
 .footer-bottom {
     border-top: 1px solid rgba(255, 255, 255, 0.06);
     padding: 1.8rem 7rem;
@@ -274,7 +273,7 @@
     margin-top: 0.25rem;
 }
 
-/* ── Responsive ───────────────────────────────────────────── */
+/* responsive */
 @media (max-width: 1024px) {
     .footer-body {
         grid-template-columns: 1fr 1fr;

@@ -1,11 +1,4 @@
-/* ═══════════════════════════════════════════════════════════
-   FLAVOURS PAGE  —  Liquid Crystal Edition
-   Inherits base tokens & navbar from style.css
-═══════════════════════════════════════════════════════════ */
-
-/* ── 1. Body overrides removed — handled by style.css in single-page mode ── */
-
-/* ── 2. Liquid-crystal animated background canvas ───────── */
+/* flavours section — LC edition */
 body::before {
     content: '';
     position: fixed;
@@ -65,10 +58,8 @@ body::after {
     }
 }
 
-/* ── 3. Scrollbar ───────────────────────────────────────── */
-::-webkit-scrollbar {
-    width: 3px;
-}
+/* scrollbar */
+::-webkit-scrollbar { width: 3px; }
 
 ::-webkit-scrollbar-track {
     background: transparent;
@@ -79,14 +70,14 @@ body::after {
     border-radius: 99px;
 }
 
-/* ── 4. Hero ─────────────────────────────────────────────── */
+/* hero */
 .fl-hero {
     padding: 5rem 8rem 3rem;
     text-align: center;
     position: relative;
 }
 
-/* Iridescent shimmer bar above title */
+/* shimmer bar above title */
 .fl-hero::before {
     content: '';
     display: block;
@@ -152,12 +143,10 @@ body::after {
     text-transform: uppercase;
 }
 
-/* ── 5. Wrapper ──────────────────────────────────────────── */
-.fl-wrapper {
-    padding: 1rem 0 8rem;
-}
+/* row wrapper */
+.fl-wrapper { padding: 1rem 0 8rem; }
 
-/* ── 6. Row ──────────────────────────────────────────────── */
+/* flavour row (2-col grid) */
 .fl-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -178,7 +167,7 @@ body::after {
     direction: ltr;
 }
 
-/* Prismatic section divider */
+/* divider line between rows */
 .fl-row+.fl-row::before {
     content: '';
     position: absolute;
@@ -195,7 +184,7 @@ body::after {
     opacity: 0.4;
 }
 
-/* ── 7. Image Block ──────────────────────────────────────── */
+/* image block + spinning border */
 .fl-img-block {
     display: flex;
     align-items: center;
@@ -206,7 +195,7 @@ body::after {
     overflow: hidden;
 }
 
-/* Liquid-crystal frame: rotating conic gradient border */
+/* LC conic border frame */
 .fl-img-block::before {
     content: '';
     position: absolute;
@@ -242,7 +231,7 @@ body::after {
     }
 }
 
-/* Inner glow fill inside the frame */
+/* inner glow fill */
 .fl-img-block::after {
     content: '';
     position: absolute;
@@ -256,7 +245,7 @@ body::after {
     z-index: 0;
 }
 
-/* ── Background image layer — sits above glow, below can ── */
+/* bg image layer — above glow, below can */
 .fl-img-bg {
     position: absolute;
     inset: 4px;
@@ -267,17 +256,16 @@ body::after {
     z-index: 1;
     opacity: 0.55;
     transform: scale(1);
-    /* explicit default — no zoom at rest */
     will-change: transform, opacity;
     transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-    /* gentle dark vignette so can stays readable */
+    /* vignette keeps can readable */
     -webkit-mask-image: radial-gradient(ellipse 85% 85% at 50% 50%,
             #000 40%, transparent 100%);
     mask-image: radial-gradient(ellipse 85% 85% at 50% 50%,
             #000 40%, transparent 100%);
 }
 
-/* Zoom ONLY on hover — clipped by overflow:hidden on .fl-img-block */
+/* zoom bg on hover (clipped by overflow:hidden) */
 .fl-img-block:hover .fl-img-bg {
     opacity: 0.75;
     transform: scale(1.06);
@@ -292,13 +280,13 @@ body::after {
     position: relative;
     z-index: 2;
     opacity: 0;
-    /* iridescent dropshadow */
+    will-change: transform; /* GPU layer — floats via GSAP */
     filter:
         drop-shadow(0 0 30px color-mix(in srgb, var(--row-accent, #7fc12b) 50%, transparent)) drop-shadow(0 30px 50px rgba(0, 0, 0, 0.8));
     transition: filter 0.6s ease;
 }
 
-/* ── 8. Detail Card — LC glassmorphism ───────────────────── */
+/* detail card — frosted glass panel */
 .fl-detail-card {
     padding: 3rem 3.5rem;
     /* frosted glass */
@@ -312,7 +300,7 @@ body::after {
     opacity: 0;
 }
 
-/* Top row: tag + know-more button */
+/* top row: tag + know-more btn */
 .fl-card-top-row {
     display: flex;
     align-items: center;
@@ -343,9 +331,7 @@ body::after {
     box-shadow: 0 0 16px var(--row-accent, #7fc12b);
 }
 
-/* ══════════════════════════════════════════════════════════
-   FLAVOUR KNOW MORE MODAL
-══════════════════════════════════════════════════════════ */
+/* know more modal */
 .fl-km-backdrop {
     position: fixed;
     inset: 0;
@@ -413,7 +399,7 @@ body::after {
     border-color: var(--fl-km-accent, #7fc12b);
 }
 
-/* Image column */
+/* modal image col */
 .fl-km-img-col {
     display: flex;
     align-items: center;
@@ -462,7 +448,7 @@ body::after {
     }
 }
 
-/* Info body */
+/* modal info body */
 .fl-km-body {
     display: flex;
     flex-direction: column;
@@ -502,7 +488,7 @@ body::after {
     max-width: 480px;
 }
 
-/* Chips */
+/* taste/sugar chips */
 .fl-km-chips {
     display: flex;
     gap: 0.8rem;
@@ -533,7 +519,7 @@ body::after {
     color: var(--fl-km-accent, #7fc12b);
 }
 
-/* Ingredients */
+/* ingredients block */
 .fl-km-ingredients-block {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.06);
@@ -558,7 +544,7 @@ body::after {
 }
 
 
-/* Holographic rainbow sweep inside the card */
+/* holo sweep inside card */
 .fl-detail-card::before {
     content: '';
     position: absolute;
@@ -585,7 +571,7 @@ body::after {
     }
 }
 
-/* Accent glow blob in the corner */
+/* corner glow blob */
 .fl-detail-card::after {
     content: '';
     position: absolute;
@@ -614,7 +600,7 @@ body::after {
     }
 }
 
-/* ── 9. Card text elements ───────────────────────────────── */
+/* card text */
 .fl-tag {
     font-weight: 600;
     font-size: 0.75rem;
@@ -662,7 +648,7 @@ body::after {
     z-index: 1;
 }
 
-/* ── 10. Stats ───────────────────────────────────────────── */
+/* stats row */
 .fl-stats {
     display: flex;
     gap: 2rem;
@@ -687,7 +673,6 @@ body::after {
     color: var(--row-accent, #7fc12b);
     letter-spacing: 1px;
     line-height: 1;
-    /* individual shimmer on the numbers */
     text-shadow: 0 0 12px var(--row-accent, #7fc12b);
     transition: color 0.5s ease, text-shadow 0.5s ease;
 }
@@ -705,7 +690,7 @@ body::after {
     color: rgba(255, 255, 255, 0.35);
 }
 
-/* ── 11. BUY button ──────────────────────────────────────── */
+/* add-to-cart button w/ LC shimmer border */
 .fl-btn {
     font-weight: 600;
     font-size: 0.85rem;

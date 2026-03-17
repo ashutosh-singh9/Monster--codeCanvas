@@ -1,15 +1,15 @@
-/* ─── FLAVOURS SECTION ────────────────────────────────────── */
+/* flavours section */
 .flavours-section {
     position: relative;
     z-index: 1;
 }
 
-/* Scrollbar */
+/* scrollbar */
 ::-webkit-scrollbar { width: 3px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 99px; }
 
-/* ─── GAME SECTION ───────────────────────────────────────── */
+/* game section */
 .game-section {
     position: relative;
     z-index: 1;
@@ -62,7 +62,7 @@
     -webkit-backdrop-filter: blur(20px);
 }
 
-/* ── HUD ─────────────────────────────────────────────────── */
+/* HUD */
 .game-hud {
     display: flex;
     align-items: center;
@@ -118,14 +118,14 @@
     box-shadow: 0 0 10px var(--accent);
 }
 
-/* ── Canvas ──────────────────────────────────────────────── */
+/* canvas */
 #game-canvas {
     display: block;
     width: 100%;
     cursor: none;
 }
 
-/* ── Overlay ─────────────────────────────────────────────── */
+/* game overlay */
 .game-overlay {
     position: absolute;
     inset: 0;
@@ -207,7 +207,7 @@
     transform: scaleX(1);
 }
 
-/* ─── EVENTS SECTION ─────────────────────────────────────── */
+/* events section */
 .events-section {
     position: relative;
     z-index: 1;
@@ -215,10 +215,7 @@
     overflow: hidden;
 }
 
-/* ── Event Rail (Removed) ──────────────────────────────────── */
-
-
-/* ── Section Heading ─────────────────────────────────────── */
+/* section heading */
 .ev-heading {
     text-align: center;
     display: flex;
@@ -257,14 +254,14 @@
     line-height: 1.7;
 }
 
-/* ── Carousel Wrapper ────────────────────────────────────── */
+/* carousel wrapper */
 .ev-carousel-wrap {
     position: relative;
     max-width: 1440px;
     margin: 0 auto;
 }
 
-/* ── Navigation Arrows ───────────────────────────────────── */
+/* carousel arrows */
 .ev-nav-btn {
     position: absolute;
     top: calc(50% - 2rem); /* Account for bottom padding */
@@ -295,7 +292,7 @@
 .ev-prev { left: 1.5rem; }
 .ev-next { right: 1.5rem; }
 
-/* ── Layout ──────────────────────────────────────────────── */
+/* layout */
 .ev-layout {
     display: flex;
     flex-wrap: nowrap;
@@ -309,7 +306,6 @@
     -webkit-overflow-scrolling: touch;
 }
 
-/* Custom scrollbar for horizontal events list */
 .ev-layout::-webkit-scrollbar {
     height: 8px;
 }
@@ -323,7 +319,7 @@
     border-radius: 10px;
 }
 
-/* ── Event Card (shared) ─────────────────────────────────── */
+/* event card */
 .ev-card {
     flex-shrink: 0;
     scroll-snap-align: start;
@@ -347,12 +343,11 @@
 }
 
 .ev-card-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
     transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
     filter: brightness(0.65) contrast(1.1);
+    will-change: transform; /* GPU-promote card zoom on hover */
 }
 
 .ev-card:hover .ev-card-img {
@@ -425,9 +420,7 @@
     transform: translateX(0);
 }
 
-/* ═══════════════════════════════════════════════════════════
-   EVENT MODAL
-══════════════════════════════════════════════════════════ */
+/* event modal */
 .ev-modal-backdrop {
     position: fixed;
     inset: 0;
@@ -575,9 +568,7 @@
     color: #000;
 }
 
-/* ═══════════════════════════════════════════════════════════
-   NEWS SECTION
-══════════════════════════════════════════════════════════ */
+/* news section */
 .news-section {
     position: relative;
     z-index: 1;
@@ -648,12 +639,11 @@
 }
 
 .nw-card-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
     transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
     filter: brightness(0.7) contrast(1.1);
+    will-change: transform; /* GPU-promote news card zoom */
 }
 
 .nw-card:hover .nw-card-img {

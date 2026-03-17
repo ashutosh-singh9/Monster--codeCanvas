@@ -1,21 +1,21 @@
 
 gsap.registerPlugin(ScrollTrigger);
 
-// ── DOM References ─────────────────────────────────────
-const can = document.getElementById('monster-can');
-const shadow = document.querySelector('.can-shadow');
-const bgGlow = document.getElementById('bgGlow');
-const navBrand = document.getElementById('nav-brand');
-const navIcon = document.querySelector('.nav-icon');
-const navCta = document.querySelector('.nav-cta');
+// -- DOM refs --
+const can       = document.getElementById('monster-can');
+const shadow    = document.querySelector('.can-shadow');
+const bgGlow    = document.getElementById('bgGlow');
+const navBrand  = document.getElementById('nav-brand');
+const navIcon   = document.querySelector('.nav-icon');
+const navCta    = document.querySelector('.nav-cta');
 const flavourLbl = document.getElementById('flavour-name');
-const btns = document.querySelectorAll('.color-btn');
-const root = document.documentElement;
-const navbar = document.getElementById('navbar');
+const btns      = document.querySelectorAll('.color-btn');
+const root      = document.documentElement;
+const navbar    = document.getElementById('navbar');
 const scrollHint = document.getElementById('scroll-hint');
 
-// ── Cursor elements ────────────────────────────────────
-const cursorDot = document.getElementById('cursor-dot');
+// -- cursor --
+const cursorDot  = document.getElementById('cursor-dot');
 const cursorRing = document.getElementById('cursor-ring');
 
 let mouseX = window.innerWidth / 2;
@@ -48,23 +48,21 @@ function bindCursorHovers() {
 }
 bindCursorHovers();
 
-// ══════════════════════════════════════════════════════
-// ACTIVE NAV SCROLL SPY
-// ══════════════════════════════════════════════════════
+// -- nav scroll-spy --
 const navLinks = {
-    home: document.getElementById('nav-home'),
+    home:     document.getElementById('nav-home'),
     flavours: document.getElementById('nav-flavours'),
-    events: document.getElementById('nav-events'),
-    news: document.getElementById('nav-news'),
-    game: document.getElementById('nav-game'),
+    events:   document.getElementById('nav-events'),
+    news:     document.getElementById('nav-news'),
+    game:     document.getElementById('nav-game'),
 };
 
 const sections = {
-    home: document.getElementById('home'),
+    home:     document.getElementById('home'),
     flavours: document.getElementById('flavours'),
-    events: document.getElementById('events'),
-    news: document.getElementById('news'),
-    game: document.getElementById('game'),
+    events:   document.getElementById('events'),
+    news:     document.getElementById('news'),
+    game:     document.getElementById('game'),
 };
 
 function setActiveNav(id) {
@@ -72,27 +70,22 @@ function setActiveNav(id) {
     if (navLinks[id]) navLinks[id].classList.add('nav-active');
 }
 
-// Use IntersectionObserver — fires when section is ≥15% visible
+// fires when section ≥15% visible
 const sectionObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            setActiveNav(entry.target.id);
-        }
+        if (entry.isIntersecting) setActiveNav(entry.target.id);
     });
 }, { threshold: 0.15 });
 
 Object.values(sections).forEach(sec => sec && sectionObserver.observe(sec));
 
-// ══════════════════════════════════════════════════════
-// LOADING SCREEN
-// ══════════════════════════════════════════════════════
-const loader = document.getElementById('loader');
-const loaderBar = document.getElementById('loader-bar');
-const loaderLogo = document.getElementById('loader-logo');
+// -- loader --
+const loader       = document.getElementById('loader');
+const loaderBar    = document.getElementById('loader-bar');
+const loaderLogo   = document.getElementById('loader-logo');
 const loaderLetters = document.querySelectorAll('#loader-tagline span:not(.loader-space)');
 
-// Disable scroll while loader is active
-document.body.style.overflow = 'hidden';
+document.body.style.overflow = 'hidden'; // lock scroll during load
 
 const loaderTl = gsap.timeline({
     onComplete: () => {
@@ -100,7 +93,6 @@ const loaderTl = gsap.timeline({
             yPercent: -105, duration: 1, ease: 'expo.inOut',
             onComplete: () => {
                 loader.remove();
-                // Re-enable scroll after loader is gone
                 document.body.style.overflow = '';
                 gsap.from(can, { opacity: 0, y: 60, scale: 0.85, duration: 1, ease: 'expo.out' });
                 gsap.from('.switch-menu', { opacity: 0, y: 30, duration: 0.8, ease: 'expo.out', delay: 0.2 });
@@ -118,29 +110,29 @@ loaderTl
     .to(loaderLogo, { filter: 'drop-shadow(0 0 40px #7fc12b) drop-shadow(0 0 80px #7fc12b)', duration: 0.3 })
     .to(loaderLogo, { opacity: 0, scale: 1.2, duration: 0.4, ease: 'power2.in' });
 
-// ══════════════════════════════════════════════════════
-// NAVBAR — scroll state
-// ══════════════════════════════════════════════════════
+// -- navbar scroll state (RAF-throttled so it doesn't fire 100x/s) --
+let scrollScheduled = false;
 window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 80);
-    if (window.scrollY > 40) {
-        gsap.to(scrollHint, { opacity: 0, duration: 0.4 });
-    } else {
-        gsap.to(scrollHint, { opacity: 1, duration: 0.4 });
-    }
+    if (scrollScheduled) return;
+    scrollScheduled = true;
+    requestAnimationFrame(() => {
+        navbar.classList.toggle('scrolled', window.scrollY > 80);
+        gsap.to(scrollHint, { opacity: window.scrollY > 40 ? 0 : 1, duration: 0.4 });
+        scrollScheduled = false;
+    });
 });
 
-// ── Initial accent ─────────────────────────────────────
+// -- initial accent --
 setAccent('#7fc12b', false);
 
-// ── GSAP Float ────────────────────────────────────────
+// -- can float anim --
 let floatTween = startFloat();
 function startFloat() {
     return gsap.to(can, { y: -28, duration: 2.2, repeat: -1, yoyo: true, ease: 'sine.inOut' });
 }
 gsap.to(shadow, { scaleX: 0.75, opacity: 0.25, duration: 2.2, repeat: -1, yoyo: true, ease: 'sine.inOut' });
 
-// ── Colour Button Clicks ───────────────────────────────
+// -- color button clicks --
 btns.forEach(btn => {
     btn.addEventListener('click', () => {
         if (btn.classList.contains('active')) return;
@@ -179,18 +171,16 @@ function setAccent(hex, animate = true) {
     bgGlow.style.background = `radial-gradient(ellipse 70% 60% at 50% 55%, ${hex}2e 0%, transparent 70%)`;
 }
 
-// ══════════════════════════════════════════════════════
-// FLAVOURS — ScrollTrigger animations
-// ══════════════════════════════════════════════════════
+// -- flavours scroll animations --
 const heroAccent = document.getElementById('fl-title-accent');
 
 gsap.from('.fl-hero-title', { opacity: 0, y: 50, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: '.fl-hero', start: 'top 80%' } });
-gsap.from('.fl-hero-sub', { opacity: 0, y: 30, duration: 0.8, delay: 0.2, ease: 'expo.out', scrollTrigger: { trigger: '.fl-hero', start: 'top 80%' } });
+gsap.from('.fl-hero-sub',   { opacity: 0, y: 30, duration: 0.8, delay: 0.2, ease: 'expo.out', scrollTrigger: { trigger: '.fl-hero', start: 'top 80%' } });
 
 document.querySelectorAll('.fl-row').forEach((row) => {
     const hex = row.dataset.accent;
     const flCan = row.querySelector('.fl-can');
-    const card = row.querySelector('.fl-detail-card');
+    const card  = row.querySelector('.fl-detail-card');
     const isReverse = row.classList.contains('fl-row--reverse');
 
     row.style.setProperty('--row-accent', hex);
@@ -226,31 +216,23 @@ function applyFlAccent(hex) {
     bgGlow.style.background = `radial-gradient(ellipse 70% 60% at 50% 55%, ${hex}2e 0%, transparent 70%)`;
 }
 
-// ── Smooth anchor scroll + immediate active nav update ──
+// -- smooth anchor scroll + instant active nav update --
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
+        const href   = this.getAttribute('href');
         const target = document.querySelector(href);
         if (target) {
             e.preventDefault();
-
-            // Immediately mark this link active
             document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('nav-active'));
             this.classList.add('nav-active');
-
             target.scrollIntoView({ behavior: 'smooth' });
         }
     });
 });
 
-// ══════════════════════════════════════════════════════
-// EVENTS SECTION — entrance + modal + accent
-// ══════════════════════════════════════════════════════
-// Accent color change on scroll into Events
+// -- events section accent + entrance --
 ScrollTrigger.create({
-    trigger: '#events',
-    start: 'top 50%',
-    end: 'bottom 50%',
+    trigger: '#events', start: 'top 50%', end: 'bottom 50%',
     onEnter: () => applyFlAccent('#e6c200'),
     onEnterBack: () => applyFlAccent('#e6c200'),
 });
@@ -260,131 +242,99 @@ gsap.from('.ev-heading', {
     scrollTrigger: { trigger: '.ev-heading', start: 'top 82%' }
 });
 
-// Stagger-animate the event cards on scroll
 gsap.from('.ev-card--featured', {
     opacity: 0, x: -60, duration: 1.1, ease: 'expo.out',
     scrollTrigger: { trigger: '.ev-layout', start: 'top 78%' }
 });
 gsap.from('.ev-card--small', {
-    opacity: 0, x: 50, duration: 0.9, ease: 'expo.out',
-    stagger: 0.12,
+    opacity: 0, x: 50, duration: 0.9, ease: 'expo.out', stagger: 0.12,
     scrollTrigger: { trigger: '.ev-layout', start: 'top 78%' }
 });
 
-// Modal references
+// -- event modal refs --
 const modalBackdrop = document.getElementById('ev-modal-backdrop');
-const modalImg = document.getElementById('ev-modal-img');
-const modalGlow = document.getElementById('ev-modal-img-glow');
-const modalTag = document.getElementById('ev-modal-tag');
-const modalTitle = document.getElementById('ev-modal-title');
-const modalDate = document.getElementById('ev-modal-date');
-const modalDesc = document.getElementById('ev-modal-desc');
-const modalClose = document.getElementById('ev-modal-close');
+const modalImg      = document.getElementById('ev-modal-img');
+const modalGlow     = document.getElementById('ev-modal-img-glow');
+const modalTag      = document.getElementById('ev-modal-tag');
+const modalTitle    = document.getElementById('ev-modal-title');
+const modalDate     = document.getElementById('ev-modal-date');
+const modalDesc     = document.getElementById('ev-modal-desc');
+const modalClose    = document.getElementById('ev-modal-close');
 
-// Image map
 const eventImgMap = {
-    f1: 'assets/images/Event_F1.jpg',
-    motogp: 'assets/images/Event_MotoGP.jpg',
+    f1:         'assets/images/Event_F1.jpg',
+    motogp:     'assets/images/Event_MotoGP.jpg',
     basketball: 'assets/images/Event_basketball.jpg',
-    football: 'assets/images/Event_football.jpg',
+    football:   'assets/images/Event_football.jpg',
 };
 
-// Glow color per event
 const eventGlowMap = {
-    f1: 'rgba(220,30,30,0.25)',
-    motogp: 'rgba(0,180,255,0.2)',
+    f1:         'rgba(220,30,30,0.25)',
+    motogp:     'rgba(0,180,255,0.2)',
     basketball: 'rgba(255,140,0,0.2)',
-    football: 'rgba(50,200,80,0.2)',
+    football:   'rgba(50,200,80,0.2)',
 };
 
 function openModal(card) {
-    const key = card.dataset.event;
+    const key   = card.dataset.event;
     const title = card.dataset.title;
-    const date = card.dataset.date;
-    const desc = card.dataset.desc;
-    const tag = card.querySelector('.ev-card-tag').textContent;
+    const date  = card.dataset.date;
+    const desc  = card.dataset.desc;
+    const tag   = card.querySelector('.ev-card-tag').textContent;
 
-    // Populate
-    modalImg.src = eventImgMap[key] || '';
-    modalImg.alt = title;
-    modalTag.textContent = tag;
+    modalImg.src   = eventImgMap[key] || '';
+    modalImg.alt   = title;
+    modalTag.textContent   = tag;
     modalTitle.textContent = title;
-    modalDate.textContent = date;
-    modalDesc.textContent = desc;
+    modalDate.textContent  = date;
+    modalDesc.textContent  = desc;
     modalGlow.style.background = `linear-gradient(135deg, ${eventGlowMap[key] || 'rgba(127,193,43,0.2)'} 0%, transparent 60%)`;
 
-    // Show backdrop (CSS transition handles blur)
     modalBackdrop.classList.add('open');
     document.body.style.overflow = 'hidden';
-
-    // GSAP — pop the modal in
     gsap.fromTo('#ev-modal',
         { y: 40, scale: 0.95, opacity: 0 },
         { y: 0, scale: 1, opacity: 1, duration: 0.5, ease: 'expo.out' }
     );
-
-    // Cursor hover rebind for modal
-    bindCursorHovers();
+    bindCursorHovers(); // rebind hovers for modal buttons
 }
 
 function closeModal() {
     gsap.to('#ev-modal', {
         y: 30, scale: 0.97, opacity: 0, duration: 0.35, ease: 'expo.in',
-        onComplete: () => {
-            modalBackdrop.classList.remove('open');
-            document.body.style.overflow = '';
-        }
+        onComplete: () => { modalBackdrop.classList.remove('open'); document.body.style.overflow = ''; }
     });
 }
 
-// Click any event card
 document.querySelectorAll('.ev-card').forEach(card => {
     card.addEventListener('click', () => openModal(card));
 });
-
-// Close button
 modalClose.addEventListener('click', closeModal);
-
-// Click outside modal
-modalBackdrop.addEventListener('click', (e) => {
-    if (e.target === modalBackdrop) closeModal();
-});
-
-// Escape key
+modalBackdrop.addEventListener('click', (e) => { if (e.target === modalBackdrop) closeModal(); });
 window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modalBackdrop.classList.contains('open')) closeModal();
 });
 
-// Add events section to IntersectionObserver (the observer is already set up above)
+// events section in observer
 const evSection = document.getElementById('events');
 if (evSection) sectionObserver.observe(evSection);
 
-// Carousel scrolling buttons
+// -- carousel arrows --
 const evLayout = document.getElementById('ev-layout');
-const evPrev = document.getElementById('ev-prev');
-const evNext = document.getElementById('ev-next');
+const evPrev   = document.getElementById('ev-prev');
+const evNext   = document.getElementById('ev-next');
 
 if (evLayout && evPrev && evNext) {
-    evPrev.addEventListener('click', () => {
-        // Scroll roughly one card width
-        evLayout.scrollBy({ left: -580, behavior: 'smooth' });
-    });
-    evNext.addEventListener('click', () => {
-        evLayout.scrollBy({ left: 580, behavior: 'smooth' });
-    });
+    evPrev.addEventListener('click', () => evLayout.scrollBy({ left: -580, behavior: 'smooth' }));
+    evNext.addEventListener('click', () => evLayout.scrollBy({ left:  580, behavior: 'smooth' }));
 }
 
-// Add News section to IntersectionObserver
+// -- news section --
 const nwSection = document.getElementById('news');
 if (nwSection) sectionObserver.observe(nwSection);
 
-// ══════════════════════════════════════════════════════
-// NEWS SECTION — entrance + accent
-// ══════════════════════════════════════════════════════
 ScrollTrigger.create({
-    trigger: '#news',
-    start: 'top 50%',
-    end: 'bottom 50%',
+    trigger: '#news', start: 'top 50%', end: 'bottom 50%',
     onEnter: () => applyFlAccent('#7fc12b'),
     onEnterBack: () => applyFlAccent('#7fc12b'),
 });
@@ -393,55 +343,49 @@ gsap.from('.nw-heading', {
     opacity: 0, y: 50, duration: 1, ease: 'expo.out',
     scrollTrigger: { trigger: '.news-section', start: 'top 82%' }
 });
-
 gsap.from('.nw-card', {
     opacity: 0, y: 60, duration: 1, stagger: 0.15, ease: 'expo.out',
     scrollTrigger: { trigger: '.nw-layout', start: 'top 85%' }
 });
-
 gsap.from('.nw-more-btn', {
     opacity: 0, y: 30, duration: 1, delay: 0.5, ease: 'expo.out',
     scrollTrigger: { trigger: '.nw-layout', start: 'top 85%' }
 });
 
-// ══════════════════════════════════════════════════════
-// NEWS MODAL
-// ══════════════════════════════════════════════════════
+// -- news modal refs --
 const nwModalBackdrop = document.getElementById('nw-modal-backdrop');
-const nwModalImg = document.getElementById('nw-modal-img');
-const nwModalGlow = document.getElementById('nw-modal-img-glow');
-const nwModalTag = document.getElementById('nw-modal-tag');
-const nwModalTitle = document.getElementById('nw-modal-title');
-const nwModalDate = document.getElementById('nw-modal-date');
-const nwModalDesc = document.getElementById('nw-modal-desc');
-const nwModalClose = document.getElementById('nw-modal-close');
+const nwModalImg      = document.getElementById('nw-modal-img');
+const nwModalGlow     = document.getElementById('nw-modal-img-glow');
+const nwModalTag      = document.getElementById('nw-modal-tag');
+const nwModalTitle    = document.getElementById('nw-modal-title');
+const nwModalDate     = document.getElementById('nw-modal-date');
+const nwModalDesc     = document.getElementById('nw-modal-desc');
+const nwModalClose    = document.getElementById('nw-modal-close');
 
-// Glow tint per news tag
 const newsGlowMap = {
     'FORMULA 1': 'rgba(220,30,30,0.25)',
-    'RALLY': 'rgba(255,160,0,0.2)',
-    'GAMING': 'rgba(0,200,255,0.2)',
-    'FIGHT': 'rgba(255,80,0,0.22)',
+    'RALLY':     'rgba(255,160,0,0.2)',
+    'GAMING':    'rgba(0,200,255,0.2)',
+    'FIGHT':     'rgba(255,80,0,0.22)',
 };
 
 function openNewsModal(card) {
-    const tag = card.dataset.tag || card.querySelector('.nw-card-tag').textContent;
-    const title = card.dataset.title || card.querySelector('.nw-card-title').textContent;
-    const date = card.dataset.date || card.querySelector('.nw-card-date').textContent;
-    const desc = card.dataset.desc || '';
+    const tag    = card.dataset.tag   || card.querySelector('.nw-card-tag').textContent;
+    const title  = card.dataset.title || card.querySelector('.nw-card-title').textContent;
+    const date   = card.dataset.date  || card.querySelector('.nw-card-date').textContent;
+    const desc   = card.dataset.desc  || '';
     const imgSrc = card.querySelector('.nw-card-img').src;
 
-    nwModalImg.src = imgSrc;
-    nwModalImg.alt = title;
-    nwModalTag.textContent = tag;
-    nwModalTitle.textContent = title;
-    nwModalDate.textContent = date;
-    nwModalDesc.textContent = desc;
+    nwModalImg.src             = imgSrc;
+    nwModalImg.alt             = title;
+    nwModalTag.textContent     = tag;
+    nwModalTitle.textContent   = title;
+    nwModalDate.textContent    = date;
+    nwModalDesc.textContent    = desc;
     nwModalGlow.style.background = `linear-gradient(135deg, ${newsGlowMap[tag] || 'rgba(127,193,43,0.2)'} 0%, transparent 60%)`;
 
     nwModalBackdrop.classList.add('open');
     document.body.style.overflow = 'hidden';
-
     gsap.fromTo('#nw-modal',
         { y: 40, scale: 0.95, opacity: 0 },
         { y: 0, scale: 1, opacity: 1, duration: 0.5, ease: 'expo.out' }
@@ -452,64 +396,45 @@ function openNewsModal(card) {
 function closeNewsModal() {
     gsap.to('#nw-modal', {
         y: 30, scale: 0.97, opacity: 0, duration: 0.35, ease: 'expo.in',
-        onComplete: () => {
-            nwModalBackdrop.classList.remove('open');
-            document.body.style.overflow = '';
-        }
+        onComplete: () => { nwModalBackdrop.classList.remove('open'); document.body.style.overflow = ''; }
     });
 }
 
-// Click any news card
 document.querySelectorAll('.nw-card').forEach(card => {
     card.addEventListener('click', () => openNewsModal(card));
 });
-
 nwModalClose.addEventListener('click', closeNewsModal);
-nwModalBackdrop.addEventListener('click', (e) => {
-    if (e.target === nwModalBackdrop) closeNewsModal();
-});
+nwModalBackdrop.addEventListener('click', (e) => { if (e.target === nwModalBackdrop) closeNewsModal(); });
 
-// ══════════════════════════════════════════════════════
-// MORE NEWS PANEL
-// ══════════════════════════════════════════════════════
+// -- more news panel --
 const nwPanelBackdrop = document.getElementById('nw-panel-backdrop');
-const nwPanelClose = document.getElementById('nw-panel-close');
-const nwMoreBtn = document.querySelector('.nw-more-btn');
+const nwPanelClose    = document.getElementById('nw-panel-close');
+const nwMoreBtn       = document.querySelector('.nw-more-btn');
 
-function openNewsPanel() {
-    nwPanelBackdrop.classList.add('open');
-    document.body.style.overflow = 'hidden';
-    bindCursorHovers();
-}
+function openNewsPanel()  { nwPanelBackdrop.classList.add('open'); document.body.style.overflow = 'hidden'; bindCursorHovers(); }
+function closeNewsPanel() { nwPanelBackdrop.classList.remove('open'); document.body.style.overflow = ''; }
 
-function closeNewsPanel() {
-    nwPanelBackdrop.classList.remove('open');
-    document.body.style.overflow = '';
-}
-
-if (nwMoreBtn) nwMoreBtn.addEventListener('click', openNewsPanel);
-if (nwPanelClose) nwPanelClose.addEventListener('click', closeNewsPanel);
+if (nwMoreBtn)       nwMoreBtn.addEventListener('click', openNewsPanel);
+if (nwPanelClose)    nwPanelClose.addEventListener('click', closeNewsPanel);
 if (nwPanelBackdrop) {
     nwPanelBackdrop.addEventListener('click', (e) => {
-        // Close only when clicking the dark backdrop, not the panel itself
+        // close only if clicking the dark backdrop, not the panel itself
         if (!document.getElementById('nw-panel').contains(e.target)) closeNewsPanel();
     });
 }
 
-// Shared Escape key handler — closes whichever is open
+// -- shared escape key handler (covers all modals + panel + cart) --
 window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-        if (nwModalBackdrop.classList.contains('open')) closeNewsModal();
-        if (nwPanelBackdrop.classList.contains('open')) closeNewsPanel();
+        if (nwModalBackdrop.classList.contains('open'))   closeNewsModal();
+        if (nwPanelBackdrop.classList.contains('open'))   closeNewsPanel();
         if (cartDrawerBackdrop && cartDrawerBackdrop.classList.contains('open')) closeCart();
-        if (confirmBackdrop && confirmBackdrop.classList.contains('open')) closeConfirm();
-        if (flKmBackdrop && flKmBackdrop.classList.contains('open')) closeFlavourModal();
+        if (confirmBackdrop    && confirmBackdrop.classList.contains('open'))    closeConfirm();
+        if (flKmBackdrop       && flKmBackdrop.classList.contains('open'))       closeFlavourModal();
     }
 });
 
-// ══════════════════════════════════════════════════════
-// SHARED UTILITIES — Toast & Confirm Modal
-// ══════════════════════════════════════════════════════
+// -- toast --
 const toastEl = document.getElementById('toast');
 let toastTimer;
 
@@ -520,16 +445,17 @@ function showToast(msg) {
     toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2800);
 }
 
-const confirmBackdrop = document.getElementById('confirm-modal-backdrop');
-const confirmIcon = document.getElementById('confirm-icon');
-const confirmTitle = document.getElementById('confirm-title');
-const confirmSub = document.getElementById('confirm-sub');
-const confirmCloseBtn = document.getElementById('confirm-close-btn');
+// -- confirm modal --
+const confirmBackdrop  = document.getElementById('confirm-modal-backdrop');
+const confirmIcon      = document.getElementById('confirm-icon');
+const confirmTitle     = document.getElementById('confirm-title');
+const confirmSub       = document.getElementById('confirm-sub');
+const confirmCloseBtn  = document.getElementById('confirm-close-btn');
 
 function showConfirm(icon, title, sub) {
-    confirmIcon.textContent = icon;
+    confirmIcon.textContent  = icon;
     confirmTitle.textContent = title;
-    confirmSub.textContent = sub;
+    confirmSub.textContent   = sub;
     confirmBackdrop.classList.add('open');
     document.body.style.overflow = 'hidden';
 }
@@ -540,28 +466,15 @@ function closeConfirm() {
 }
 
 if (confirmCloseBtn) confirmCloseBtn.addEventListener('click', closeConfirm);
-if (confirmBackdrop) confirmBackdrop.addEventListener('click', (e) => {
-    if (e.target === confirmBackdrop) closeConfirm();
-});
+if (confirmBackdrop) confirmBackdrop.addEventListener('click', (e) => { if (e.target === confirmBackdrop) closeConfirm(); });
 
-// ══════════════════════════════════════════════════════
-// HAMBURGER MENU — Mobile nav toggle
-// ══════════════════════════════════════════════════════
-const hamburger = document.getElementById('hamburger');
+// -- hamburger / mobile nav --
+const hamburger       = document.getElementById('hamburger');
 const mobileNavOverlay = document.getElementById('mobile-nav-overlay');
-const mobileNavLinks = mobileNavOverlay ? mobileNavOverlay.querySelectorAll('a') : [];
+const mobileNavLinks  = mobileNavOverlay ? mobileNavOverlay.querySelectorAll('a') : [];
 
-function openMobileNav() {
-    document.body.classList.add('nav-open');
-    document.body.style.overflow = 'hidden';
-    hamburger && hamburger.setAttribute('aria-expanded', 'true');
-}
-
-function closeMobileNav() {
-    document.body.classList.remove('nav-open');
-    document.body.style.overflow = '';
-    hamburger && hamburger.setAttribute('aria-expanded', 'false');
-}
+function openMobileNav()  { document.body.classList.add('nav-open'); document.body.style.overflow = 'hidden'; hamburger && hamburger.setAttribute('aria-expanded', 'true'); }
+function closeMobileNav() { document.body.classList.remove('nav-open'); document.body.style.overflow = ''; hamburger && hamburger.setAttribute('aria-expanded', 'false'); }
 
 if (hamburger) {
     hamburger.addEventListener('click', () => {
@@ -569,32 +482,22 @@ if (hamburger) {
     });
 }
 
-// Close overlay when any mobile nav link is tapped
-mobileNavLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        closeMobileNav();
-    });
-});
+// close overlay when any mobile link is tapped
+mobileNavLinks.forEach(link => link.addEventListener('click', closeMobileNav));
 
-// Sync mobile nav active highlight with desktop scroll-spy
+// -- sync mobile nav active highlight with desktop scroll-spy via MutationObserver --
 const mobileNavMap = {
-    home: document.getElementById('mnav-home'),
+    home:     document.getElementById('mnav-home'),
     flavours: document.getElementById('mnav-flavours'),
-    events: document.getElementById('mnav-events'),
-    news: document.getElementById('mnav-news'),
-    game: document.getElementById('mnav-game'),
+    events:   document.getElementById('mnav-events'),
+    news:     document.getElementById('mnav-news'),
+    game:     document.getElementById('mnav-game'),
 };
 
-// Patch setActiveNav to also update mobile nav
-const _origSetActiveNav = setActiveNav;
-// Re-observe using the same IntersectionObserver — mobile nav highlights
-// are driven by a MutationObserver watching the desktop nav-active class
 const navObserver = new MutationObserver(() => {
     Object.keys(navLinks).forEach(id => {
         const isActive = navLinks[id] && navLinks[id].classList.contains('nav-active');
-        if (mobileNavMap[id]) {
-            mobileNavMap[id].classList.toggle('nav-active', isActive);
-        }
+        if (mobileNavMap[id]) mobileNavMap[id].classList.toggle('nav-active', isActive);
     });
 });
 
@@ -602,10 +505,7 @@ Object.values(navLinks).forEach(link => {
     if (link) navObserver.observe(link, { attributes: true, attributeFilter: ['class'] });
 });
 
-// Close mobile nav on Escape
+// close mobile nav on Escape
 window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && document.body.classList.contains('nav-open')) {
-        closeMobileNav();
-    }
+    if (e.key === 'Escape' && document.body.classList.contains('nav-open')) closeMobileNav();
 });
-

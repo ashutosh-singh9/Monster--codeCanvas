@@ -14,9 +14,7 @@
 
 <body>
 
-    <!-- ══════════════════════════════════════════════════════ -->
-    <!-- LOADING SCREEN                                         -->
-    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- # loader -->
     <div id="loader">
         <div class="loader-bg"></div>
         <div class="loader-content">
@@ -33,7 +31,7 @@
             </div>
         </div>
     </div>
-
+    
     <!-- CUSTOM CURSOR -->
     <div class="cursor-dot" id="cursor-dot"></div>
     <div class="cursor-ring" id="cursor-ring"></div>
@@ -41,9 +39,7 @@
     <!-- BACKGROUND GLOW -->
     <div class="background-glow" id="bgGlow"></div>
 
-    <!-- ══════════════════════════════════════════════════════ -->
-    <!-- STICKY NAVBAR                                          -->
-    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- # navbar -->
     <nav class="navbar" id="navbar">
         <div class="nav-logo">
             <img src="assets/images/logo.png" alt="Monster claw" class="nav-icon">
@@ -75,9 +71,7 @@
         <a href="#game" id="mnav-game">Game</a>
     </div>
 
-    <!-- ══════════════════════════════════════════════════════ -->
-    <!-- SECTION 1 — HERO                                       -->
-    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- # home -->
     <section class="home-section" id="home">
 
         <!-- MONSTER RAIL (scrolling text band) -->
@@ -99,7 +93,8 @@
         <!-- CAN DISPLAY -->
         <div class="can-wrapper">
             <div class="can-shadow"></div>
-            <img src="assets/images/green.png" alt="Monster Energy Can" id="monster-can">
+            <img src="assets/images/green.png" alt="Monster Energy Can" id="monster-can"
+                fetchpriority="high" decoding="async">
         </div>
 
         <!-- SCROLL HINT -->
@@ -130,9 +125,7 @@
 
     </section>
 
-    <!-- ══════════════════════════════════════════════════════ -->
-    <!-- SECTION 2 — FLAVOURS                                   -->
-    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- # flavours -->
     <section class="flavours-section" id="flavours">
 
         <!-- PAGE HERO -->
@@ -147,7 +140,8 @@
             <div class="fl-row" data-accent="#7fc12b" data-index="0">
                 <div class="fl-img-block">
                     <div class="fl-img-bg" style="background-image: url('assets/images/green_background.png')"></div>
-                    <img src="assets/images/green.png" alt="Original Green Monster" class="fl-can">
+                    <img src="assets/images/green.png" alt="Original Green Monster" class="fl-can"
+                        loading="lazy" decoding="async">
                 </div>
                 <div class="fl-detail-card" data-km-name="Original Green" data-km-tag="Original"
                     data-km-accent="#7fc12b" data-km-img="assets/images/green.png"
@@ -180,7 +174,8 @@
             <div class="fl-row fl-row--reverse" data-accent="#00e5ff" data-index="1">
                 <div class="fl-img-block">
                     <div class="fl-img-bg" style="background-image: url('assets/images/blue_background.png')"></div>
-                    <img src="assets/images/cyan.png" alt="Ultra Blue Monster" class="fl-can">
+                    <img src="assets/images/cyan.png" alt="Ultra Blue Monster" class="fl-can"
+                        loading="lazy" decoding="async">
                 </div>
                 <div class="fl-detail-card" data-km-name="Ultra Blue" data-km-tag="Ultra" data-km-accent="#00e5ff"
                     data-km-img="assets/images/cyan.png"
@@ -212,7 +207,8 @@
             <div class="fl-row" data-accent="#9c27b0" data-index="2">
                 <div class="fl-img-block">
                     <div class="fl-img-bg" style="background-image: url('assets/images/purple_background.png')"></div>
-                    <img src="assets/images/purple.png" alt="Ultra Violet Monster" class="fl-can">
+                    <img src="assets/images/purple.png" alt="Ultra Violet Monster" class="fl-can"
+                        loading="lazy" decoding="async">
                 </div>
                 <div class="fl-detail-card" data-km-name="Ultra Violet" data-km-tag="Ultra" data-km-accent="#9c27b0"
                     data-km-img="assets/images/purple.png"
@@ -244,7 +240,8 @@
             <div class="fl-row fl-row--reverse" data-accent="#f44336" data-index="3">
                 <div class="fl-img-block">
                     <div class="fl-img-bg" style="background-image: url('assets/images/red_background.png')"></div>
-                    <img src="assets/images/red.png" alt="Mango Loco Monster" class="fl-can">
+                    <img src="assets/images/red.png" alt="Mango Loco Monster" class="fl-can"
+                        loading="lazy" decoding="async">
                 </div>
                 <div class="fl-detail-card" data-km-name="Mango Loco" data-km-tag="Juice" data-km-accent="#f44336"
                     data-km-img="assets/images/red.png"
@@ -276,9 +273,7 @@
         </div><!-- /fl-wrapper -->
     </section>
 
-    <!-- ══════════════════════════════════════════════════════ -->
-    <!-- FLAVOUR KNOW MORE MODAL                               -->
-    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- # flavour know-more modal -->
     <div class="fl-km-backdrop" id="fl-km-backdrop">
         <div class="fl-km-modal" id="fl-km-modal">
             <button class="fl-km-close" id="fl-km-close" aria-label="Close">✕</button>
@@ -317,9 +312,7 @@
         </div>
     </div>
 
-    <!-- ══════════════════════════════════════════════════════ -->
-    <!-- SECTION 2.5 — EVENTS                                   -->
-    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- # events -->
     <section class="events-section" id="events">
 
         <!-- EVENT RAIL (Removed) -->
@@ -341,7 +334,8 @@
                 <!-- Card 1 -->
                 <div class="ev-card" data-event="f1" data-title="Formula 1 Grand Prix" data-date="March 2026 · Bahrain"
                     data-desc="Monster Energy partners with Scuderia Ferrari and Red Bull Racing in the ultimate test of speed, engineering, and nerve. Witness 20 cars pushing the boundaries of physics at over 340 km/h. Experience the roar of the engines, the smell of burning rubber, and the unmistakable energy of the pit lane.">
-                    <img src="assets/images/Event_F1.jpg" alt="Formula 1" class="ev-card-img">
+                    <img src="assets/images/Event_F1.jpg" alt="Formula 1" class="ev-card-img"
+                        loading="lazy" decoding="async">
                     <div class="ev-card-overlay">
                         <span class="ev-card-tag">★ FEATURED</span>
                         <h3 class="ev-card-title">Formula 1<br>Grand Prix</h3>
@@ -354,7 +348,8 @@
                 <div class="ev-card" data-event="motogp" data-title="MotoGP World Championship"
                     data-date="April 2026 · Argentina"
                     data-desc="Monster Energy Yamaha MotoGP factory team battles the world's best riders on a 260km/h machine that weighs just 157kg. From the throttle to the apex, every millisecond counts. Feel the lean, the grip, and the pure animal instinct of MotoGP at the highest level.">
-                    <img src="assets/images/Event_MotoGP.jpg" alt="MotoGP" class="ev-card-img">
+                    <img src="assets/images/Event_MotoGP.jpg" alt="MotoGP" class="ev-card-img"
+                        loading="lazy" decoding="async">
                     <div class="ev-card-overlay">
                         <span class="ev-card-tag">MOTORSPORT</span>
                         <h3 class="ev-card-title">MotoGP World Championship</h3>
@@ -367,7 +362,8 @@
                 <div class="ev-card" data-event="basketball" data-title="Monster Energy NBA Playoffs"
                     data-date="May 2026 · Los Angeles"
                     data-desc="Monster Energy fuels the hardwood heroes of the NBA Playoffs. The intensity, the crowd, the buzzer-beaters — this is basketball at its most electric. Monster courtside activations bring the energy right into your hands, while the game unfolds at a pace that makes your heartbeat match the crowd's roar.">
-                    <img src="assets/images/Event_basketball.jpg" alt="Basketball" class="ev-card-img">
+                    <img src="assets/images/Event_basketball.jpg" alt="Basketball" class="ev-card-img"
+                        loading="lazy" decoding="async">
                     <div class="ev-card-overlay">
                         <span class="ev-card-tag">BASKETBALL</span>
                         <h3 class="ev-card-title">NBA Playoffs</h3>
@@ -380,7 +376,8 @@
                 <div class="ev-card" data-event="football" data-title="Monster Energy FC Showcase"
                     data-date="June 2026 · Madrid"
                     data-desc="Monster Energy sponsors some of the most explosive talent in football. From stunning free kicks to lung-busting sprints, every match is a spectacle of skill and raw energy. Monster booth activations let fans get hands-on with the brand while watching their heroes perform under stadium lights.">
-                    <img src="assets/images/Event_football.jpg" alt="Football" class="ev-card-img">
+                    <img src="assets/images/Event_football.jpg" alt="Football" class="ev-card-img"
+                        loading="lazy" decoding="async">
                     <div class="ev-card-overlay">
                         <span class="ev-card-tag">FOOTBALL</span>
                         <h3 class="ev-card-title">FC Showcase Madrid</h3>
@@ -394,9 +391,7 @@
 
     </section>
 
-    <!-- ══════════════════════════════════════════════════════ -->
-    <!-- EVENT MODAL                                            -->
-    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- # event modal -->
     <div class="ev-modal-backdrop" id="ev-modal-backdrop">
         <div class="ev-modal" id="ev-modal">
             <button class="ev-modal-close" id="ev-modal-close" aria-label="Close">✕</button>
@@ -414,9 +409,7 @@
         </div>
     </div>
 
-    <!-- ══════════════════════════════════════════════════════ -->
-    <!-- SECTION 3 — NEWS                                       -->
-    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- # news -->
     <section class="news-section" id="news">
 
         <div class="nw-heading">
@@ -430,7 +423,7 @@
                 data-title="Lando Norris Crowned 2025 World Champion" data-date="November 2025 · Motors"
                 data-desc="In a stunning championship finale, Lando Norris of McLaren secured the 2025 Formula 1 Drivers' World Championship, backed by Monster Energy. After a season of relentless pressure, brilliant strategy, and scintillating pace, the British driver claimed his maiden title with a dominant lights-to-flag victory. Monster Energy was there every step of the way, fuelling the team through exhausting test days, gruelling race weekends, and late-night debrief sessions that made this title possible.">
                 <img src="assets/images/Lando Norris Crowned 2025 World Champion(news).png" alt="Lando Norris"
-                    class="nw-card-img">
+                    class="nw-card-img" loading="lazy" decoding="async">
                 <div class="nw-card-overlay">
                     <span class="nw-card-tag">FORMULA 1</span>
                     <h3 class="nw-card-title">Lando Norris Crowned 2025 World Champion</h3>
@@ -446,7 +439,7 @@
                     data-date="January 2024 · Offroad"
                     data-desc="Monster Energy athlete Adrien Van Beveren secured a brilliant 3rd place at the 2024 Dakar Rally, one of the most gruelling off-road competitions on the planet. In this exclusive interview, Van Beveren opens up about navigating the sand dunes of Saudi Arabia across 14 stages, pushing through mechanical setbacks, and the mental fortitude required to finish on the podium against the world's best rally riders. He credits Monster Energy's sponsorship for the logistical support and team morale that made the result possible.">
                     <img src="assets/images/Interview with 2024 Dakar Rally 3rd Place Finisher Adrien Van Beveren (News).png"
-                        alt="Dakar Rally" class="nw-card-img">
+                        alt="Dakar Rally" class="nw-card-img" loading="lazy" decoding="async">
                     <div class="nw-card-overlay">
                         <span class="nw-card-tag">RALLY</span>
                         <h3 class="nw-card-title">Interview with Dakar Rally Finisher</h3>
@@ -459,7 +452,7 @@
                     data-title="Mastering Verdansk: Pro Tips for Dominating Warzone" data-date="March 2025 · Esports"
                     data-desc="Monster Energy's roster of professional Call of Duty Warzone players share their elite strategies for dominating Verdansk. From optimal landing zones and looting routes to late-game circle management and weapon meta breakdowns, this insider guide is built for players who want to compete at the highest level. Monster Energy's esports division has partnered with top streamers and competitive players to bring you the edge you need to rack up wins and climb the ranked ladder.">
                     <img src="assets/images/Mastering Verdansk  Pro Tips for Dominating Warzone(News).png" alt="Warzone"
-                        class="nw-card-img">
+                        class="nw-card-img" loading="lazy" decoding="async">
                     <div class="nw-card-overlay">
                         <span class="nw-card-tag">GAMING</span>
                         <h3 class="nw-card-title">Mastering Verdansk: Pro Tips</h3>
@@ -472,7 +465,7 @@
                     data-title="Pitbull Scores First UFC Victory at UFC 318" data-date="August 2025 · MMA"
                     data-desc="Monster Energy athlete Patricio 'Pitbull' Freire delivered a stunning performance at UFC 318, securing his first UFC victory in dramatic fashion. The former Bellator featherweight champion showed why he is one of the most dangerous strikers on the planet, delivering a second-round TKO that sent the crowd into a frenzy. Monster Energy's UFC partnership ensures Pitbull receives world-class training support, nutrition planning, and recovery resources — the same formula that made him a champion across multiple promotions.">
                     <img src="assets/images/Monster Energy’s Patricio ‘Pitbull’ Freire Scores First UFC Victory at UFC 318(News).png"
-                        alt="UFC" class="nw-card-img">
+                        alt="UFC" class="nw-card-img" loading="lazy" decoding="async">
                     <div class="nw-card-overlay">
                         <span class="nw-card-tag">FIGHT</span>
                         <h3 class="nw-card-title">Pitbull Scores First UFC Victory</h3>
@@ -489,9 +482,7 @@
 
     </section>
 
-    <!-- ══════════════════════════════════════════════════════ -->
-    <!-- NEWS MODAL                                             -->
-    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- # news modal -->
     <div class="nw-modal-backdrop" id="nw-modal-backdrop">
         <div class="nw-modal" id="nw-modal">
             <button class="nw-modal-close" id="nw-modal-close" aria-label="Close">✕</button>
@@ -509,9 +500,7 @@
         </div>
     </div>
 
-    <!-- ══════════════════════════════════════════════════════ -->
-    <!-- MORE NEWS PANEL                                        -->
-    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- # more news panel -->
     <div class="nw-panel-backdrop" id="nw-panel-backdrop">
         <div class="nw-panel" id="nw-panel">
             <!-- Header -->
